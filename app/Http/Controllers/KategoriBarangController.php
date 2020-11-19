@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Barang;
-use Session;
+use App\KategoriBarang;
 use Illuminate\Http\Request;
 
-class BarangController extends Controller
+class KategoriBarangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barangs = Barang::all();
-        return view('barang.index', compact('barangs'));
+        //
     }
 
     /**
@@ -37,24 +35,16 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        $barang = new Barang();
-        $barang->nama = $request->nama_barang;
-        $barang->keterangan = $request->keterangan;
-        $barang->created_at = now();
-        $barang->save();
-
-        Session::flash('sukses', 'Data Barang Berhasil Disave!');
-
-        return redirect('/barang');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\KategoriBarang  $kategoriBarang
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(KategoriBarang $kategoriBarang)
     {
         //
     }
@@ -62,10 +52,10 @@ class BarangController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\KategoriBarang  $kategoriBarang
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(KategoriBarang $kategoriBarang)
     {
         //
     }
@@ -74,29 +64,22 @@ class BarangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\KategoriBarang  $kategoriBarang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, KategoriBarang $kategoriBarang)
     {
-        $barang = Barang::find($id);
-        $barang->update($request->all());
-        Session::flash('sukses', 'Data Barang Berhasil Diedit!');
-
-        return redirect('/barang');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\KategoriBarang  $kategoriBarang
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(KategoriBarang $kategoriBarang)
     {
-        Barang::find($id)->delete();
-        Session::flash('sukses', 'Data Barang Berhasil Dihapus!');
-
-        return redirect('/barang');
+        //
     }
 }

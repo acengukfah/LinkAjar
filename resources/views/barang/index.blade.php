@@ -17,7 +17,6 @@
   <!-- Content Column -->
   <div class="col-lg-12">
 
-   
     <!-- Project Card Example -->
     <div class="card shadow mb-4">
       <div class="card-header d-sm-flex align-items-center justify-content-between">
@@ -49,14 +48,14 @@
                                 <label class="font-18 font-medium color-gray"
                                     for="namaBarang">Nama Barang</label>
                                 <input type="text" class="form-control" id="namaBarang" name="nama_barang"
-                                    placeholder="Nama Barang">
+                                    placeholder="Nama Barang" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="font-18 font-medium color-gray"
                                     for="keterangan">Keterangan</label>
                                 <input type="text" class="form-control" id="keterangan" name="keterangan"
-                                    placeholder="Keterangan">
+                                    placeholder="Keterangan" required>
                             </div>
                         </div>
                         <div class="modal-footer">
