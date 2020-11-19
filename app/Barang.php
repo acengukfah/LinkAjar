@@ -8,7 +8,16 @@ class Barang extends Model
 {
     //
     protected $fillable = [
-        'nama_barang',
-        'keterangan'
+        'nama', 'keterangan', 'kategori_id'
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo('App\KategoriBarang');
+    }
+
+    public function details()
+    {
+        return $this->hasMany('App\Detail');
+    }
 }

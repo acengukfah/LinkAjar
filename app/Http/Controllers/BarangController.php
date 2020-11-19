@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
+use App\Detail;
+use App\JenisPersediaan;
+use App\KategoriBarang;
+use App\Persediaan;
 use Session;
 use Illuminate\Http\Request;
 
@@ -38,8 +42,9 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $barang = new Barang();
-        $barang->nama = $request->nama_barang;
+        $barang->nama = $request->nama;
         $barang->keterangan = $request->keterangan;
+        $barang->kategori_id = $request->kategori_id;
         $barang->created_at = now();
         $barang->save();
 

@@ -61,13 +61,13 @@
   </head>
   <body>
       <div class=" header text-center py-3 mt-4">
-        <h2 class="display-5 d-sm-flex align-items-center justify-content-center">Aplikasi Manajemen Barang</h2>
+        <h2 class="display-5 d-sm-flex align-items-center justify-content-center">Aplikasi Persediaan Barang</h2>
       </div>
     <div class="container mt-2">
         @yield('container')
     </div>
     <div class=" footer-copyright text-center py-3">
-        © 2019 Copyright Made By: fsociety Dev Team</a>
+        © 2020 Copyright - BPN Kantor Pertanahan Kab. Klaten</a>
     </div>
 
     <!-- Optional JavaScript -->

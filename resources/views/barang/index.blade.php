@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label class="font-18 font-medium color-gray"
                                     for="namaBarang">Nama Barang</label>
-                                <input type="text" class="form-control" id="namaBarang" name="nama_barang"
+                                <input type="text" class="form-control" id="namaBarang" name="nama"
                                     placeholder="Nama Barang" required>
                             </div>
 
@@ -56,6 +56,13 @@
                                     for="keterangan">Keterangan</label>
                                 <input type="text" class="form-control" id="keterangan" name="keterangan"
                                     placeholder="Keterangan" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="font-18 font-medium color-gray"
+                                    for="kategori_id">Kategori</label>
+                                <input type="text" class="form-control" id="kategori_id" name="kategori_id"
+                                    placeholder="ID Kateogori" required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -76,18 +83,22 @@
                 <th>#</th>
                 <th>Nama Barang</th>
                 <th>Keterangan</th>
+                <th>Kategori</th>
                 <th>Tanggal Buat</th>
                 <th>Aksi</th>
               </tr>
             </thead>
 
             <tbody>
-                @php $i = 1;  @endphp
-              @foreach($barangs->sortByDesc('created_at') as $barang)
+                @php 
+                $i = 1;  
+                @endphp
+            @foreach($barangs->sortByDesc('created_at') as $barang)
               <tr>
                 <td>{{$i}}</td>
-                <td>{{$barang->nama_barang}}</td>
+                <td>{{$barang->nama}}</td>
                 <td>{{$barang->keterangan}}</td>
+                <td>{{$barang->kategori->nama}}</td>
                 <td>{{$barang->created_at}}</td>
                 <td>
                     <button href="/barang/edit/{{$barang->id}}" class="btn btn-success bg-custom font-white d-sm-inline-block" data-toggle="modal" data-target="#modalEditBarang{{$barang->id}}">Edit</button>
@@ -112,8 +123,8 @@
                                         <div class="form-group">
                                             <label class="font-18 font-medium color-gray"
                                                 for="namaBarang">Nama Barang</label>
-                                            <input type="text" class="form-control" id="namaBarang" name="nama_barang"
-                                                value="{{$barang->nama_barang}}">
+                                            <input type="text" class="form-control" id="namaBarang" name="nama"
+                                                value="{{$barang->nama}}">
                                         </div>
             
                                         <div class="form-group">
@@ -121,6 +132,13 @@
                                                 for="keterangan">Keterangan</label>
                                             <input type="text" class="form-control" id="keterangan" name="keterangan"
                                                 value="{{$barang->keterangan}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="font-18 font-medium color-gray"
+                                                for="kategori_id">Kategori</label>
+                                            <input type="text" class="form-control" id="kategori_id" name="kategori_id"
+                                                value="{{$barang->kategori_id}}">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

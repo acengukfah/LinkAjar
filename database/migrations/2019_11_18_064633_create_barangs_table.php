@@ -17,7 +17,7 @@ class CreateBarangsTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('keterangan');
-            $table->int('kategori_id');
+            $table->integer('kategori_id');
             $table->timestamps();
         });
     }
