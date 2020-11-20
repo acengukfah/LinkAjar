@@ -84,21 +84,8 @@
                 <div class="title m-b-md">
                     Selamat Datang
                 </div>
-
                 <h1>
-                    <a class="badge badge-primary " href="/barang">Barang</a>
-                </h1>
-                <h1>
-                    <a class="badge badge-primary " href="/kategori-barang">Kategori Barang</a>
-                </h1>
-                <h1>
-                    <a class="badge badge-primary " href="/jenis-persediaan">Jenis Persediaan</a>
-                </h1>
-                <h1>
-                    <a class="badge badge-primary " href="/detail">Detail</a>
-                </h1>
-                <h1>
-                    <a class="badge badge-primary " href="/persediaan">Persediaan</a>
+                    <a class="badge badge-primary " href="/persediaan">Mulai Sekarang</a>
                 </h1>
             </div>
         </div>

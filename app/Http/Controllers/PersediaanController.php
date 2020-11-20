@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Detail;
+use App\Barang;
 use App\JenisPersediaan;
+use App\Pembukuan;
 use App\Persediaan;
 use Session;
 use Illuminate\Http\Request;
@@ -18,10 +19,10 @@ class PersediaanController extends Controller
     public function index()
     {
         $persediaans = Persediaan::all();
-        $details = Detail::all();
+        $barangs = Barang::all();
+        $pembukuans = Pembukuan::all();
         $jenis_persediaans = JenisPersediaan::all();
-
-        return view('persediaan.index', compact('persediaans','details','jenis_persediaans'));
+        return view('persediaan.index', compact('persediaans','barangs','pembukuans','jenis_persediaans'));
     }
 
     /**
@@ -43,11 +44,11 @@ class PersediaanController extends Controller
     public function store(Request $request)
     {
         $persediaan = new Persediaan();
-        $persediaan->no_dokumen = $request->no_dokumen;
-        $persediaan->no_bukti = $request->no_bukti;
-        $persediaan->tgl_pembukuan = $request->tgl_pembukuan;
-        $persediaan->tgl_dokumen = $request->tgl_dokumen;
-        $persediaan->detail_id = $request->detail_id;
+        $persediaan->barang_id = $request->barang_id;
+        $persediaan->jumlah = $request->jumlah;
+        $persediaan->harga_satuan = $request->harga_satuan;
+        $persediaan->total = ($request->harga_satuan * $request->jumlah);
+        $persediaan->pembukuan_id = $request->pembukuan_id;
         $persediaan->jenis_persediaan_id = $request->jenis_persediaan_id;
         $persediaan->created_at = now();
         $persediaan->save();

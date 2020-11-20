@@ -7,16 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Persediaan extends Model
 {
     protected $fillable = [
-        'no_dokumen', 'no_bukti', 'tgl_pembukuan', 'tgl_dokumen', 'detail_id', 'jenis_persediaan_id'
+        'jumlah', 'barang_id', 'harga_satuan','pembukuan_id','jenis_persediaan_id'
     ];
-
+    
+    public function pembukuan()
+    {
+        return $this->belongsTo('App\Pembukuan');
+    }
     public function jenis_persediaan()
     {
         return $this->belongsTo('App\JenisPersediaan');
     }
 
-    public function detail()
+    public function barang()
     {
-        return $this->belongsTo('App\Detail');
+        return $this->belongsTo('App\Barang');
     }
 }

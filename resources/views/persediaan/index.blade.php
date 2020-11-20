@@ -1,6 +1,6 @@
 @extends('layout/index')
 
-@section('title', 'Data Persediaan')
+@section('title', 'Detail Persediaan')
 
 @section('container')
 
@@ -12,7 +12,7 @@
 @endif
 
 <!-- Content Row -->
-<div class="row">
+<div class="row mt-3">
 
   <!-- Content Column -->
   <div class="col-lg-12">
@@ -40,42 +40,44 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="persediaan" method="POST">
+                    <form action="/persediaan" method="POST">
                         @csrf
                         <div class="modal-body">
-                            {{-- input Data Persediaan --}}
-                           
+                            {{-- input Detail Persediaan --}}
                             <div class="form-group">
                                 <label class="font-18 font-medium color-gray"
-                                    for="no_dokumen">Nomor Dokumen</label>
-                                <input type="number" class="form-control" id="no_dokumen" name="no_dokumen"
-                                    placeholder="Nomor Dokumen" required>
+                                    for="namaBarang">Nama Barang</label>
+
+                                <select class="custom-select" id="namaBarang" name="barang_id">
+                                    <option selected>Pilih Nama Barang</option>
+                                    @foreach ($barangs as $barang)
+                                        <option value="{{$barang->id}}">{{$barang->nama}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="font-18 font-medium color-gray"
-                                    for="no_bukti">Nomor Bukti</label>
-                                <input type="number" class="form-control" id="no_bukti" name="no_bukti"
-                                    placeholder="Nomor Bukti" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="font-18 font-medium color-gray"
-                                    for="tgl_pembukuan">Tanggal Buku</label>
-                                <input class="datepicker form-control" type="text" id="tgl_pembukuan" name="tgl_pembukuan">
-                            </div>
-                            <div class="form-group">
-                                <label class="font-18 font-medium color-gray"
-                                    for="tgl_dokumen">Tanggal Dokumen</label>
+
                                 
-                                <input class="datepicker date form-control" type="text" id="tgl_dokumen" name="tgl_dokumen">
+                            <div class="form-group">
+                                <label class="font-18 font-medium color-gray"
+                                    for="jumlah">Jumlah</label>
+                                <input type="number" class="form-control" id="jumlah" name="jumlah"
+                                    placeholder="Jumlah" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="font-18 font-medium color-gray"
+                                    for="harga_satuan">Harga Satuan</label>
+                                <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
+                                    placeholder="Harga Satuan" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="font-18 font-medium color-gray" for="detail_id">Nama Barang - Jumlahnya</label>
+                                <label class="font-18 font-medium color-gray" for="pembukuan_id">Tanggal Dokumen dan Tanggal Pembukuan</label>
                             
-                                <select class="custom-select" id="detail_id" name="detail_id">
-                                    <option selected>Pilih Barang dan Jumlahnya</option>
-                                    @foreach ($persediaans as $persediaan)
-                                    <option value="{{$persediaan->id}}">{{$persediaan->detail->barang->nama}} - {{$persediaan->detail->jumlah}}</option>
+                                <select class="custom-select" id="pembukuan_id" name="pembukuan_id">
+                                    <option selected>Pilih Tanggal Dokumen dan Tanggal Pembukuan</option>
+                                    @foreach ($pembukuans as $pembukuan)
+                                    <option value="{{$pembukuan->id}}">{{$pembukuan->tgl_dokumen}} dan {{$pembukuan->tgl_pembukuan}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -84,13 +86,12 @@
                                 <label class="font-18 font-medium color-gray" for="jenis_persediaan_id">Jenis Persediaan</label>
                             
                                 <select class="custom-select" id="jenis_persediaan_id" name="jenis_persediaan_id">
-                                    <option selected>Pilih Jenis Persediaan</option>
+                                    <option selected>Pilih Jenis Persediaan/option>
                                     @foreach ($jenis_persediaans as $jenis_persediaan)
-                                        <option value="{{$jenis_persediaan->id}}">{{$jenis_persediaan->nama}}</option>
+                                    <option value="{{$jenis_persediaan->id}}">{{$jenis_persediaan->nama}}</option>
                                     @endforeach
                                 </select>
                             </div>
-
                             
                         </div>
                         <div class="modal-footer">
@@ -109,13 +110,12 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Nomor Dokumen</th>
-                <th>Nomor Bukti</th>
-                <th>Tanggal Buku</th>
-                <th>Tanggal Dokumen</th>
                 <th>Nama Barang</th>
                 <th>Jumlah</th>
+                <th>Tanggal Dokumen</th>
+                <th>Tanggal Pembukuan</th>
                 <th>Jenis Persediaan</th>
+                <th>Harga Satuan</th>
                 <th>Total</th>
                 <th>Aksi</th>
               </tr>
@@ -128,20 +128,103 @@
             @foreach($persediaans->sortByDesc('created_at') as $persediaan)
               <tr>
                 <td>{{$i}}</td>
-                <td>{{$persediaan->no_dokumen}}</td>
-                <td>{{$persediaan->no_bukti}}</td>
-                <td>{{$persediaan->tgl_pembukuan}}</td>
-                <td>{{$persediaan->tgl_dokumen}}</td>
-                <td>{{$persediaan->detail->barang->nama}}</td>
-                <td>{{$persediaan->detail->jumlah}}</td>
+                <td>{{$persediaan->barang->nama}}</td>
+                <td>{{$persediaan->jumlah}}</td>
+                <td>{{$persediaan->pembukuan->tgl_dokumen}}</td>
+                <td>{{$persediaan->pembukuan->tgl_pembukuan}}</td>
                 <td>{{$persediaan->jenis_persediaan->nama}}</td>
-                <td>{{$persediaan->detail->total}}</td>
+                <td>{{$persediaan->harga_satuan}}</td>
+                <td>{{$persediaan->total}}</td>
                 <td>
-                    <button href="persediaan/edit/{{$persediaan->id}}" class="btn btn-success bg-custom font-white d-sm-inline-block" data-toggle="modal" data-target="#modalEditBarang{{$persediaan->id}}">Edit</button>
-                    <a href="persediaan/delete/{{$persediaan->id}}" class="btn btn-danger bg-danger font-white">Delete</a>
+                    <button href="/persediaan/edit/{{$persediaan->id}}" class="btn btn-success bg-custom font-white d-sm-inline-block" data-toggle="modal" data-target="#modalEditBarang{{$persediaan->id}}">Edit</button>
+                    <a href="/persediaan/delete/{{$persediaan->id}}" class="btn btn-danger bg-danger font-white">Delete</a>
 
                     {{-- Modal Edit --}}
-                    
+                    <div class="modal fade" id="modalEditBarang{{$persediaan->id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="modalEditBarang" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title font-bold color-gray font-18"
+                                        id="modalEditBarang">Edit Detail</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="/persediaan/update/{{$persediaan->id}}" method="POST">
+                                    @csrf
+                                    <div class="modal-body">
+                                        {{-- input Detail Persediaan --}}
+                                        <div class="form-group">
+                                            <label class="font-18 font-medium color-gray"
+                                                for="namaBarang">Nama Barang</label>
+                                            <select class="custom-select" id="namaBarang" name="barang_id">
+                                                <option selected>Pilih Nama Barang</option>
+                                                @foreach ($barangs as $barang)
+                                                    @if ($persediaan->barang->nama == $barang->nama)
+                                                        <option value="{{$barang->id}}" selected>{{$barang->nama}}</option>
+                                                    @else
+                                                        <option value="{{$barang->id}}">{{$barang->nama}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+            
+                                        <div class="form-group">
+                                            <label class="font-18 font-medium color-gray"
+                                                for="jumlah">Jumlah</label>
+                                            <input type=numbert" class="form-control" id="jumlah" name="jumlah"
+                                                value="{{$persediaan->jumlah}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="font-18 font-medium color-gray"
+                                                for="harga_satuan">Harga Satuan</label>
+                                            <input type="number" class="form-control" id="harga_satuan" name="harga_satuan"
+                                                value="{{$persediaan->harga_satuan}}">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="font-18 font-medium color-gray" for="namaBarang">Tanggal Dokumen - Tanggal Pembukuan</label>
+                                        
+                                            <select class="custom-select" id="namaBarang" name="barang_id">
+                                                <option selected>Pilih Tanggal Dokumen - Tanggal Pembukuan</option>
+                                                @foreach ($pembukuans as $pembukuan)
+                                                    @if ($persediaan->pembukuan->id == $pembukuan->id)
+                                                        <option value="{{$pembukuan->id}}" selected>{{$pembukuan->tgl_dokumen}} - {{$pembukuan->tgl_pembukuan}}</option>
+                                                    @else
+                                                        <option value="{{$pembukuan->id}}">{{$pembukuan->tgl_dokumen}} - {{$pembukuan->tgl_pembukuan}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="font-18 font-medium color-gray" for="namaBarang">Jenis Persediaan/label>
+                                        
+                                                <select class="custom-select" id="namaBarang" name="barang_id">
+                                                    <option selected>Pilih Jenis Persediaan/option>
+                                                    @foreach ($jenis_persediaans as $jenis_persediaan)
+                                                        @if ($persediaan->jenis_persediaan->id == $jenis_persediaan->id)
+                                                            <option value="{{$jenis_persediaan->id}}" selected>{{$jenis_persediaan->nama}}</option>
+                                                        @else
+                                                            <option value="{{$jenis_persediaan->id}}">{{$jenis_persediaan->nama}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Kembali</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </td>                
               </tr>
               @php $i++;  @endphp

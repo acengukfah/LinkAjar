@@ -15,12 +15,12 @@ class CreatePersediaansTable extends Migration
     {
         Schema::create('persediaans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('no_dokumen');
-            $table->integer('no_bukti');
-            $table->date('tgl_pembukuan');
-            $table->date('tgl_dokumen');
-            $table->integer('detail_id');
+            $table->integer('barang_id');
+            $table->integer('jumlah');
+            $table->integer('harga_satuan');
+            $table->integer('pembukuan_id');
             $table->integer('jenis_persediaan_id');
+            $table->integer('total');
             $table->timestamps();
         });
     }

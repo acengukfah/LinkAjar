@@ -64,8 +64,14 @@
         <h2 class="display-5 d-sm-flex align-items-center justify-content-center">Aplikasi Persediaan Barang</h2>
       </div>
     <div class="container mt-2">
+        <a href="/barang" class="btn btn-primary bg-primary font-white">Barang</a>
+        <a href="/kategori-barang" class="btn btn-primary bg-primary font-white">Kategori Barang</a>
+        <a href="/jenis-persediaan" class="btn btn-primary bg-primary font-white">Jenis Persediaan</a>
+        <a href="/persediaan" class="btn btn-primary bg-primary font-white">Persediaan</a>
+        <a href="/pembukuan" class="btn btn-primary bg-primary font-white">Pembukuan</a>
         @yield('container')
     </div>
+
     <div class=" footer-copyright text-center py-3">
         © 2020 Copyright - BPN Kantor Pertanahan Kab. Klaten</a>
     </div>

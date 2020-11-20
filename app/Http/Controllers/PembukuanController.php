@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Barang;
-use App\Detail;
+use App\Pembukuan;
 use Session;
 use Illuminate\Http\Request;
 
-class DetailController extends Controller
+class PembukuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,8 @@ class DetailController extends Controller
      */
     public function index()
     {
-        $details = Detail::all();
-        $barangs = Barang::all();
-        return view('detail.index', compact('details','barangs'));
+        $pembukuans = Pembukuan::all();
+        return view('pembukuan.index', compact('pembukuans'));
     }
 
     /**
@@ -39,17 +37,17 @@ class DetailController extends Controller
      */
     public function store(Request $request)
     {
-        $detail = new Detail();
-        $detail->barang_id = $request->barang_id;
-        $detail->jumlah = $request->jumlah;
-        $detail->harga_satuan = $request->harga_satuan;
-        $detail->total = ($request->harga_satuan * $request->jumlah);
-        $detail->created_at = now();
-        $detail->save();
+        $pembukuan = new Pembukuan();
+        $pembukuan->no_dokumen = $request->no_dokumen;
+        $pembukuan->no_bukti = $request->no_bukti;
+        $pembukuan->tgl_pembukuan = $request->tgl_pembukuan;
+        $pembukuan->tgl_dokumen = $request->tgl_dokumen;
+        $pembukuan->created_at = now();
+        $pembukuan->save();
 
-        Session::flash('sukses', 'Data Detail Berhasil Disave!');
+        Session::flash('sukses', 'Data Pembukuan Berhasil Disave!');
 
-        return redirect('/detail');
+        return redirect('/pembukuan');
     }
 
     /**
@@ -83,11 +81,11 @@ class DetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $detail = Detail::find($id);
-        $detail->update($request->all());
-        Session::flash('sukses', 'Data Detail Berhasil Diedit!');
+        $pembukuan = Pembukuan::find($id);
+        $pembukuan->update($request->all());
+        Session::flash('sukses', 'Data Pembukuan Berhasil Diedit!');
 
-        return redirect('/detail');
+        return redirect('/pembukuan');
     }
 
     /**
@@ -98,9 +96,9 @@ class DetailController extends Controller
      */
     public function destroy($id)
     {
-        Detail::find($id)->delete();
-        Session::flash('sukses', 'Data Detail Berhasil Dihapus!');
+        Pembukuan::find($id)->delete();
+        Session::flash('sukses', 'Data Pembukuan Berhasil Dihapus!');
 
-        return redirect('/detail');
+        return redirect('/pembukuan');
     }
 }

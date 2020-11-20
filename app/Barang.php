@@ -16,8 +16,8 @@ class Barang extends Model
         return $this->belongsTo('App\KategoriBarang');
     }
 
-    public function details()
+    public function persediaans()
     {
-        return $this->hasMany('App\Detail');
+        return $this->hasMany('App\Persediaan');
     }
 }

@@ -32,12 +32,12 @@ Route::post('/jenis-persediaan', 'JenisPersediaanController@store');
 Route::get('/jenis-persediaan/delete/{id}', 'JenisPersediaanController@destroy');
 Route::get('/jenis-persediaan/edit/{id}', 'JenisPersediaanController@edit');
 Route::post('/jenis-persediaan/update/{id}', 'JenisPersediaanController@update');
-//details
-Route::get('/detail', 'DetailController@index');
-Route::post('/detail', 'DetailController@store');
-Route::get('/detail/delete/{id}', 'DetailController@destroy');
-Route::get('/detail/edit/{id}', 'DetailController@edit');
-Route::post('/detail/update/{id}', 'DetailController@update');
+//pembukuan
+Route::get('/pembukuan', 'PembukuanController@index');
+Route::post('/pembukuan', 'PembukuanController@store');
+Route::get('/pembukuan/delete/{id}', 'PembukuanController@destroy');
+Route::get('/pembukuan/edit/{id}', 'PembukuanController@edit');
+Route::post('/pembukuan/update/{id}', 'PembukuanController@update');
 //persediaan
 Route::get('/persediaan', 'PersediaanController@index');
 Route::post('/persediaan', 'PersediaanController@store');

@@ -1,6 +1,6 @@
 @extends('layout/index')
 
-@section('title', 'Data Barang')
+@section('title', 'Data Persediaan')
 
 @section('container')
 
@@ -20,53 +20,53 @@
     <!-- Project Card Example -->
     <div class="card shadow mb-4">
       <div class="card-header d-sm-flex align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold color-gray">Data Barang</h6>
+        <h6 class="m-0 font-weight-bold color-gray">Data Pembukuan</h6>
 
         {{-- Tombol tambah kategori dengan modal --}}
         <button class="btn btn-link font-green font-bold d-sm-inline-block"
                 data-toggle="modal" data-target="#modalTambahKategori">
-                +Tambah Barang
+                +Tambah Pembukuan
       </button>
 
-        {{-- Modal tambah Barang --}}
+        {{-- Modal tambah Detail --}}
         <div class="modal fade" id="modalTambahKategori" tabindex="-1" role="dialog"
             aria-labelledby="modalTambahBarang" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title font-bold color-gray font-18"
-                            id="modalTambahBarang">Tambah Barang</h5>
+                            id="modalTambahBarang">Tambah Pembukuan</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/barang" method="POST">
+                    <form action="/pembukuan" method="POST">
                         @csrf
                         <div class="modal-body">
-                            {{-- input data barang --}}
+                            {{-- input Data Persediaan --}}
+                           
                             <div class="form-group">
                                 <label class="font-18 font-medium color-gray"
-                                    for="namaBarang">Nama Barang</label>
-                                <input type="text" class="form-control" id="namaBarang" name="nama"
-                                    placeholder="Nama Barang" required>
+                                    for="no_dokumen">Nomor Dokumen</label>
+                                <input type="text" class="form-control" id="no_dokumen" name="no_dokumen"
+                                    placeholder="Nomor Dokumen" required>
                             </div>
-
                             <div class="form-group">
                                 <label class="font-18 font-medium color-gray"
-                                    for="keterangan">Keterangan</label>
-                                <input type="text" class="form-control" id="keterangan" name="keterangan"
-                                    placeholder="Keterangan" required>
+                                    for="no_bukti">Nomor Bukti</label>
+                                <input type="text" class="form-control" id="no_bukti" name="no_bukti"
+                                    placeholder="Nomor Bukti" required>
                             </div>
-                            
                             <div class="form-group">
                                 <label class="font-18 font-medium color-gray"
-                                    for="kategori_id">Kategori</label>
-                                <select class="custom-select" id="namaBarang" name="kategori_id">
-                                    <option selected>Pilih Kategori Barang</option>
-                                    @foreach ($kategori_barangs as $kategori_barang)
-                                    <option value="{{$kategori_barang->id}}">{{$kategori_barang->nama}}</option>
-                                    @endforeach
-                                </select>
+                                    for="tgl_pembukuan">Tanggal Buku</label>
+                                <input class="datepicker form-control" type="text" id="tgl_pembukuan" name="tgl_pembukuan">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-18 font-medium color-gray"
+                                    for="tgl_dokumen">Tanggal Dokumen</label>
+                                
+                                <input class="datepicker date form-control" type="text" id="tgl_dokumen" name="tgl_dokumen">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -85,10 +85,10 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Nama Barang</th>
-                <th>Keterangan</th>
-                <th>Kategori</th>
-                <th>Tanggal Buat</th>
+                <th>Nomor Dokumen</th>
+                <th>Nomor Bukti</th>
+                <th>Tanggal Buku</th>
+                <th>Tanggal Dokumen</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -97,65 +97,52 @@
                 @php 
                 $i = 1;  
                 @endphp
-            @foreach($barangs->sortByDesc('created_at') as $barang)
+            @foreach($pembukuans->sortByDesc('created_at') as $pembukuan)
               <tr>
                 <td>{{$i}}</td>
-                <td>{{$barang->nama}}</td>
-                <td>{{$barang->keterangan}}</td>
-                <td>{{$barang->kategori->nama}}</td>
-                <td>{{$barang->created_at}}</td>
+                <td>{{$pembukuan->no_dokumen}}</td>
+                <td>{{$pembukuan->no_bukti}}</td>
+                <td>{{$pembukuan->tgl_pembukuan}}</td>
+                <td>{{$pembukuan->tgl_dokumen}}</td>
                 <td>
-                    <button href="/barang/edit/{{$barang->id}}" class="btn btn-success bg-custom font-white d-sm-inline-block" data-toggle="modal" data-target="#modalEditBarang{{$barang->id}}">Edit</button>
-                    <a href="/barang/delete/{{$barang->id}}" class="btn btn-danger bg-danger font-white">Delete</a>
+                    <button href="/pembukuan/edit/{{$pembukuan->id}}" class="btn btn-success bg-custom font-white d-sm-inline-block" data-toggle="modal" data-target="#modalEditBarang{{$pembukuan->id}}">Edit</button>
+                    <a href="/pembukuan/delete/{{$pembukuan->id}}" class="btn btn-danger bg-danger font-white">Delete</a>
 
                     {{-- Modal Edit --}}
-                    <div class="modal fade" id="modalEditBarang{{$barang->id}}" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="modalEditBarang{{$pembukuan->id}}" tabindex="-1" role="dialog"
                         aria-labelledby="modalEditBarang" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title font-bold color-gray font-18"
-                                        id="modalEditBarang">Edit Barang</h5>
+                                    <h5 class="modal-title font-bold color-gray font-18" id="modalEditBarang">Edit Kategori Barang</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="/barang/update/{{$barang->id}}" method="POST">
+                                <form action="/pembukuan/update/{{$pembukuan->id}}" method="POST">
                                     @csrf
                                     <div class="modal-body">
                                         {{-- input data barang --}}
                                         <div class="form-group">
-                                            <label class="font-18 font-medium color-gray"
-                                                for="namaBarang">Nama Barang</label>
-                                            <input type="text" class="form-control" id="namaBarang" name="nama"
-                                                value="{{$barang->nama}}">
+                                            <label class="font-18 font-medium color-gray" for="no_dokumen">Nomor Dokumen</label>
+                                            <input type="text" class="form-control" id="no_dokumen" name="no_dokumen"
+                                                value="{{$pembukuan->no_dokumen}}">
                                         </div>
-            
                                         <div class="form-group">
-                                            <label class="font-18 font-medium color-gray"
-                                                for="keterangan">Keterangan</label>
-                                            <input type="text" class="form-control" id="keterangan" name="keterangan"
-                                                value="{{$barang->keterangan}}">
+                                            <label class="font-18 font-medium color-gray" for="no_bukti">Nomor Bukti</label>
+                                            <input type="text" class="form-control" id="no_bukti" name="no_bukti" value="{{$pembukuan->no_bukti}}">
                                         </div>
-
                                         <div class="form-group">
-                                            <label class="font-18 font-medium color-gray"
-                                                for="kategori_id">Kategori</label>
-                                            <select class="custom-select" id="namaBarang" name="kategori_id">
-                                                <option selected>Pilih Kategori Barang</option>
-                                                @foreach ($kategori_barangs as $kategori_barang)
-                                                    @if ($barang->kategori->nama == $kategori_barang->nama)
-                                                        <option value="{{$kategori_barang->id}}" selected>{{$kategori_barang->nama}}</option>
-                                                    @else
-                                                        <option value="{{$kategori_barang->id}}">{{$kategori_barang->nama}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
+                                            <label class="font-18 font-medium color-gray" for="tgl_pembukuan">Tanggal Buku</label>
+                                            <input class="datepicker form-control" type="text" id="tgl_pembukuan" name="tgl_pembukuan" value="{{$pembukuan->tgl_pembukuan}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-18 font-medium color-gray" for="tgl_dokumen">Tanggal Dokumen</label>
+                                            <input class="datepicker date form-control" type="text" id="tgl_dokumen" name="tgl_dokumen" value="{{$pembukuan->tgl_dokumen}}">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Kembali</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </form>
