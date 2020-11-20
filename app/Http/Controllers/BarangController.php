@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
+use App\KategoriBarang;
 use Session;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class BarangController extends Controller
     public function index()
     {
         $barangs = Barang::all();
-        return view('barang.index', compact('barangs'));
+        $kategori_barangs = KategoriBarang::all();
+        return view('barang.index', compact('barangs','kategori_barangs'));
     }
 
     /**

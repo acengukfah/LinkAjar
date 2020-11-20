@@ -38,3 +38,9 @@ Route::post('/detail', 'DetailController@store');
 Route::get('/detail/delete/{id}', 'DetailController@destroy');
 Route::get('/detail/edit/{id}', 'DetailController@edit');
 Route::post('/detail/update/{id}', 'DetailController@update');
+//persediaan
+Route::get('/persediaan', 'PersediaanController@index');
+Route::post('/persediaan', 'PersediaanController@store');
+Route::get('/persediaan/delete/{id}', 'PersediaanController@destroy');
+Route::get('/persediaan/edit/{id}', 'PersediaanController@edit');
+Route::post('/persediaan/update/{id}', 'PersediaanController@update');

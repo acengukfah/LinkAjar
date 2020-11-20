@@ -61,8 +61,12 @@
                             <div class="form-group">
                                 <label class="font-18 font-medium color-gray"
                                     for="kategori_id">Kategori</label>
-                                <input type="text" class="form-control" id="kategori_id" name="kategori_id"
-                                    placeholder="ID Kateogori" required>
+                                <select class="custom-select" id="namaBarang" name="kategori_id">
+                                    <option selected>Pilih Kategori Barang</option>
+                                    @foreach ($kategori_barangs as $kategori_barang)
+                                    <option value="{{$kategori_barang->id}}">{{$kategori_barang->nama}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -137,8 +141,16 @@
                                         <div class="form-group">
                                             <label class="font-18 font-medium color-gray"
                                                 for="kategori_id">Kategori</label>
-                                            <input type="text" class="form-control" id="kategori_id" name="kategori_id"
-                                                value="{{$barang->kategori_id}}">
+                                            <select class="custom-select" id="namaBarang" name="kategori_id">
+                                                <option selected>Pilih Kategori Barang</option>
+                                                @foreach ($kategori_barangs as $kategori_barang)
+                                                    @if ($barang->kategori->nama == $kategori_barang->nama)
+                                                        <option value="{{$kategori_barang->id}}" selected>{{$kategori_barang->nama}}</option>
+                                                    @else
+                                                        <option value="{{$kategori_barang->id}}">{{$kategori_barang->nama}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

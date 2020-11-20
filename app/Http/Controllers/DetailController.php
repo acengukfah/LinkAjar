@@ -42,7 +42,8 @@ class DetailController extends Controller
         $detail = new Detail();
         $detail->barang_id = $request->barang_id;
         $detail->jumlah = $request->jumlah;
-        $detail->harga_satuan = $request->harga;
+        $detail->harga_satuan = $request->harga_satuan;
+        $detail->total = ($request->harga_satuan * $request->jumlah);
         $detail->created_at = now();
         $detail->save();
 

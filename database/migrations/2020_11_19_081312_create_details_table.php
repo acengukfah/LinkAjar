@@ -18,6 +18,7 @@ class CreateDetailsTable extends Migration
             $table->integer('barang_id');
             $table->integer('jumlah');
             $table->integer('harga_satuan');
+            $table->integer('total');
             $table->timestamps();
         });
     }

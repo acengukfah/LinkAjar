@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Detail;
+use App\JenisPersediaan;
 use App\Persediaan;
+use Session;
 use Illuminate\Http\Request;
 
 class PersediaanController extends Controller
@@ -14,7 +17,11 @@ class PersediaanController extends Controller
      */
     public function index()
     {
-        //
+        $persediaans = Persediaan::all();
+        $details = Detail::all();
+        $jenis_persediaans = JenisPersediaan::all();
+
+        return view('persediaan.index', compact('persediaans','details','jenis_persediaans'));
     }
 
     /**
@@ -35,16 +42,28 @@ class PersediaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $persediaan = new Persediaan();
+        $persediaan->no_dokumen = $request->no_dokumen;
+        $persediaan->no_bukti = $request->no_bukti;
+        $persediaan->tgl_pembukuan = $request->tgl_pembukuan;
+        $persediaan->tgl_dokumen = $request->tgl_dokumen;
+        $persediaan->detail_id = $request->detail_id;
+        $persediaan->jenis_persediaan_id = $request->jenis_persediaan_id;
+        $persediaan->created_at = now();
+        $persediaan->save();
+
+        Session::flash('sukses', 'Data Persediaan Berhasil Disave!');
+
+        return redirect('/persediaan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Persediaan  $persediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Persediaan $persediaan)
+    public function show($id)
     {
         //
     }
@@ -52,10 +71,10 @@ class PersediaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Persediaan  $persediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Persediaan $persediaan)
+    public function edit($id)
     {
         //
     }
@@ -64,22 +83,29 @@ class PersediaanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Persediaan  $persediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Persediaan $persediaan)
+    public function update(Request $request, $id)
     {
-        //
+        $persediaan = Persediaan::find($id);
+        $persediaan->update($request->all());
+        Session::flash('sukses', 'Data Persediaan Berhasil Diedit!');
+
+        return redirect('/persediaan');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Persediaan  $persediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Persediaan $persediaan)
+    public function destroy($id)
     {
-        //
+        Persediaan::find($id)->delete();
+        Session::flash('sukses', 'Data Persediaan Berhasil Dihapus!');
+
+        return redirect('/persediaan');
     }
 }
