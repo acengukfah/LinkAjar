@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\JenisPersediaan;
+use Session;
 use Illuminate\Http\Request;
 
 class JenisPersediaanController extends Controller
@@ -14,7 +15,8 @@ class JenisPersediaanController extends Controller
      */
     public function index()
     {
-        //
+        $jenis_persediaans = JenisPersediaan::all();
+        return view('jenis_persediaan.index', compact('jenis_persediaans'));
     }
 
     /**
@@ -35,16 +37,23 @@ class JenisPersediaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jenis_persediaan = new JenisPersediaan();
+        $jenis_persediaan->nama = $request->nama;
+        $jenis_persediaan->created_at = now();
+        $jenis_persediaan->save();
+
+        Session::flash('sukses', 'Data Jenis Persediaan Berhasil Disave!');
+
+        return redirect('/jenis-persediaan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\JenisPersediaan  $jenisPersediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(JenisPersediaan $jenisPersediaan)
+    public function show($id)
     {
         //
     }
@@ -52,10 +61,10 @@ class JenisPersediaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\JenisPersediaan  $jenisPersediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(JenisPersediaan $jenisPersediaan)
+    public function edit($id)
     {
         //
     }
@@ -64,22 +73,29 @@ class JenisPersediaanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\JenisPersediaan  $jenisPersediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JenisPersediaan $jenisPersediaan)
+    public function update(Request $request, $id)
     {
-        //
+        $jenis_persediaan = JenisPersediaan::find($id);
+        $jenis_persediaan->update($request->all());
+        Session::flash('sukses', 'Data Jenis Persediaan Berhasil Diedit!');
+
+        return redirect('/jenis-persediaan');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\JenisPersediaan  $jenisPersediaan
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JenisPersediaan $jenisPersediaan)
+    public function destroy($id)
     {
-        //
+        JenisPersediaan::find($id)->delete();
+        Session::flash('sukses', 'Data Jenis Persediaan Berhasil Dihapus!');
+
+        return redirect('/jenis-persediaan');
     }
 }

@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
-use App\Detail;
-use App\JenisPersediaan;
-use App\KategoriBarang;
-use App\Persediaan;
 use Session;
 use Illuminate\Http\Request;
 

@@ -86,7 +86,13 @@
                 </div>
 
                 <h1>
-                    <a class="badge badge-primary " href="/barang">Ayo Mulai Sekarang</a>
+                    <a class="badge badge-primary " href="/barang">Barang</a>
+                </h1>
+                <h1>
+                    <a class="badge badge-primary " href="/kategori-barang">Kategori Barang</a>
+                </h1>
+                <h1>
+                    <a class="badge badge-primary " href="/jenis-persediaan">Jenis Persediaan</a>
                 </h1>
             </div>
         </div>
