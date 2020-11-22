@@ -111,10 +111,10 @@
               <tr>
                 <th>#</th>
                 <th>Nama Barang</th>
-                <th>Jumlah</th>
                 <th>Tanggal Dokumen</th>
                 <th>Tanggal Pembukuan</th>
                 <th>Jenis Persediaan</th>
+                <th>Jumlah</th>
                 <th>Harga Satuan</th>
                 <th>Total</th>
                 <th>Aksi</th>
@@ -129,10 +129,10 @@
               <tr>
                 <td>{{$i}}</td>
                 <td>{{$persediaan->barang->nama}}</td>
-                <td>{{$persediaan->jumlah}}</td>
                 <td>{{$persediaan->pembukuan->tgl_dokumen}}</td>
                 <td>{{$persediaan->pembukuan->tgl_pembukuan}}</td>
                 <td>{{$persediaan->jenis_persediaan->nama}}</td>
+                <td>{{$persediaan->jumlah}}</td>
                 <td>{{$persediaan->harga_satuan}}</td>
                 <td>{{$persediaan->total}}</td>
                 <td>
