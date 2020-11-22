@@ -44,3 +44,5 @@ Route::post('/persediaan', 'PersediaanController@store');
 Route::get('/persediaan/delete/{id}', 'PersediaanController@destroy');
 Route::get('/persediaan/edit/{id}', 'PersediaanController@edit');
 Route::post('/persediaan/update/{id}', 'PersediaanController@update');
+//export testing
+Route::get('/export', 'PersediaanExportController@export');
