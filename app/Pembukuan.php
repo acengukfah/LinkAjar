@@ -12,6 +12,6 @@ class Pembukuan extends Model
 
     public function persediaans()
     {
-        return $this->hasMany('App\Persediaan','id','id');
+        return $this->hasMany('App\Persediaan','pembukuan_id');
     }
 }

@@ -11,7 +11,6 @@ class JenisPersediaan extends Model
     ];
 
     public function persediaans()
-    {
-        return $this->hasMany('App\Persediaan');
+            return $this->hasMany('App\Persediaan','jenis_persediaan_id');
     }
 }

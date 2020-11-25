@@ -49,3 +49,6 @@ Route::get('/saldo_awal', 'ExportController@saldo_awal');
 Route::get('/pembelian', 'ExportController@pembelian');
 Route::get('/transfer_masuk', 'ExportController@transfer_masuk');
 Route::get('/transfer_keluar', 'ExportController@transfer_keluar');
+Route::get('/tampil', 'ExportController@tampil');
+
+Route::get('/input-data', 'InputController@index');
