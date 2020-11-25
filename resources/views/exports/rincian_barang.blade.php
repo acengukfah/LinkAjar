@@ -38,36 +38,64 @@
         <td colspan="3"></td>
         <td colspan="3">0</td>
     </tr>
-    {{-- @php
+    @php
         $tambah = 0;
         $kurang = 0;
+        $tambah_old = 0;
+        $kurang_old = 0;
+        $total_old = 0;
+        $rupiah_old = 0;
+        $rupiah = 0;
+        $jumlah = 0;
         $total = 0;
-    @endphp --}}
+    @endphp
         @foreach ($kategori->barangs as $barang)
         <tr>
-            {{-- @foreach ($barang->persediaans as $item)
-                @if ($item->jenis_persediaan_id == 1 || $item->jenis_persediaan_id == 2 || $item->jenis_persediaan_id == 3)
+            @foreach ($barang->persediaans as $item)
+                @foreach ($persediaans_old as $old)
+                @if ($item->id == $old->id)
+                    @if ($item->jenis_persediaan_id == 1 || $item->jenis_persediaan_id == 2 || $item->jenis_persediaan_id == 3)
                     @php
-                        $tambah += 1;
-                    @endphp
-                @elseif($item->jenis_persediaan_id == 4)
+                            $tambah_old += $item->jumlah;
+                            $rupiah_old += $item->total;
+                            @endphp
+                    @elseif($item->jenis_persediaan_id == 4)
                     @php
-                        $kurang += 1;
-                    @endphp
+                            $kurang_old += $item->jumlah;
+                            $rupiah_old -= $item->total;
+                            @endphp
+                    @endif
                 @endif
+                @endforeach
+                @foreach ($persediaans as $persediaan)
+                @if ($item->id == $persediaan->id)
+                    @if ($item->jenis_persediaan_id == 1 || $item->jenis_persediaan_id == 2 || $item->jenis_persediaan_id == 3)
+                    @php
+                            $tambah += $item->jumlah;
+                            $rupiah += $item->total;
+                            @endphp
+                    @elseif($item->jenis_persediaan_id == 4)
+                    @php
+                            $kurang += $item->jumlah;
+                            $rupiah -= $item->total;
+                            @endphp
+                    @endif
+                @endif
+                @endforeach
             @endforeach
             @php
                 $total = $total + ($tambah - $kurang);
-            @endphp --}}
+                $total_old = $total_old + ($tambah_old - $kurang_old);
+            @endphp
             <td>{{$barang->id}}</td>
             <td>{{$barang->nama}}</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td>{{$total_old}}</td>
+            <td>{{$rupiah_old}}</td>
+            <td>{{$tambah}}</td>
+            <td>{{$kurang}}</td>
+            <td>{{$total}}</td>
+            <td>{{($total_old+$total)}}</td>
+            <td>{{($rupiah_old + $rupiah)}}</td>
         </tr>
         @endforeach
     @endforeach
