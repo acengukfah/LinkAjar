@@ -45,4 +45,7 @@ Route::get('/persediaan/delete/{id}', 'PersediaanController@destroy');
 Route::get('/persediaan/edit/{id}', 'PersediaanController@edit');
 Route::post('/persediaan/update/{id}', 'PersediaanController@update');
 //export testing
-Route::get('/export', 'PersediaanExportController@export');
+Route::get('/saldo_awal', 'ExportController@saldo_awal');
+Route::get('/pembelian', 'ExportController@pembelian');
+Route::get('/transfer_masuk', 'ExportController@transfer_masuk');
+Route::get('/transfer_keluar', 'ExportController@transfer_keluar');

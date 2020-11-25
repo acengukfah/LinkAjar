@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class PersediaanExport implements FromView, ShouldAutoSize
+class TransferKeluarExport implements FromView, ShouldAutoSize
 {
     use Exportable;
     /**
@@ -16,8 +16,8 @@ class PersediaanExport implements FromView, ShouldAutoSize
     */
     public function view(): View
     {
-        return view('exports.persediaan', [
-            'persediaans' => Persediaan::all()
+        return view('exports.transfer_keluar', [
+            'persediaans' => Persediaan::where('jenis_persediaan_id', '4')->get()
         ]);
     }
 }
