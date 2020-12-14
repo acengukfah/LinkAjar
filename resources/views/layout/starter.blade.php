@@ -52,7 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item {{ Request::is('/saldo-awal*') ? 'menu-open' : '' || Request::is('/pembelian*') ? 'menu-open' : '' || Request::is('/transfer-masuk*') ? 'menu-open' : '' || Request::is('/transfer-keluar*') ? 'menu-open' : ''}}">
+          <li class="nav-item menu-open{{ Request::is('/saldo-awal*') ? 'menu-open' : '' || Request::is('/pembelian*') ? 'menu-open' : '' || Request::is('/transfer-masuk*') ? 'menu-open' : '' || Request::is('/transfer-keluar*') ? 'menu-open' : ''}}">
             <a href="#" class="nav-link {{ Request::is('/saldo-awal*') ? 'active' : '' || Request::is('/pembelian*') ? 'active' : '' || Request::is('/transfer-masuk*') ? 'active' : '' || Request::is('/transfer-keluar*') ? 'active' : ''}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -62,7 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/saldo-awal" class="nav-link {{ Request::is('/saldo-awal*') ? 'active' : '' }}">
+                <a href="/saldo-awal" class="nav-link {{ (request()->is('/saldo-awal*')) ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Saldo Awal</p>
                 </a>
@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/transfer-keluar" class="nav-link {{ Request::is('/transfer-keluar*') ? 'active' : '' }}">
+                <a href="/transfer-keluar" class="nav-link {{ Request::is('/*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Transfer Keluar</p>
                 </a>
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/barang" class="nav-link">
+            <a href="/barang" class="nav-link {{ Request::is('/barang*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Referensi Barang
@@ -96,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="/pembukuan" class="nav-link">
+            <a href="/pembukuan" class="nav-link {{ Request::is('/barang*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Pembukuan

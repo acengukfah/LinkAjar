@@ -1,8 +1,8 @@
-@extends('layout/index')
+@extends('layout/starter')
 
 @section('title', 'Detail Persediaan')
-
-@section('container')
+@section('header','Persediaan')
+@section('content')
 
 @if ($message = Session::get('sukses'))
     <div class="alert alert-success alert-block">

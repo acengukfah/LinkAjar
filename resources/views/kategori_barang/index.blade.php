@@ -1,7 +1,7 @@
 @extends('layout/starter')
 
 @section('title', 'Kategori Barang')
-
+@section('header','Kategori Barang')
 @section('content')
 
 @if ($message = Session::get('sukses'))
