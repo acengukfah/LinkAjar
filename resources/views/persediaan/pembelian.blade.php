@@ -257,6 +257,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <a class="btn btn-primary" href="/exp-pembelian" role="button">Export Data</a>
                 </div>
             </div>
         </div>

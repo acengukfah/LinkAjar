@@ -255,6 +255,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <a class="btn btn-primary" href="/exp-transfer_keluar" role="button">Export Data</a>
                 </div>
             </div>
         </div>
