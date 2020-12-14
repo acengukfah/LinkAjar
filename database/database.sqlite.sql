@@ -1,96 +1,11 @@
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS "migrations" (
-	"id"	integer NOT NULL,
-	"migration"	varchar NOT NULL,
-	"batch"	integer NOT NULL,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "users" (
-	"id"	integer NOT NULL,
-	"name"	varchar NOT NULL,
-	"email"	varchar NOT NULL,
-	"email_verified_at"	datetime,
-	"password"	varchar NOT NULL,
-	"remember_token"	varchar,
-	"created_at"	datetime,
-	"updated_at"	datetime,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "password_resets" (
-	"email"	varchar NOT NULL,
-	"token"	varchar NOT NULL,
-	"created_at"	datetime
-);
-CREATE TABLE IF NOT EXISTS "failed_jobs" (
-	"id"	integer NOT NULL,
-	"connection"	text NOT NULL,
-	"queue"	text NOT NULL,
-	"payload"	text NOT NULL,
-	"exception"	text NOT NULL,
-	"failed_at"	datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "barangs" (
-	"id"	integer NOT NULL,
-	"nama"	varchar NOT NULL,
-	"keterangan"	varchar NOT NULL,
-	"kategori_id"	integer NOT NULL,
-	"created_at"	datetime,
-	"updated_at"	datetime,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "kategori_barangs" (
-	"id"	integer NOT NULL,
-	"nama"	varchar NOT NULL,
-	"created_at"	datetime,
-	"updated_at"	datetime,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "jenis_persediaans" (
-	"id"	integer NOT NULL,
-	"nama"	varchar NOT NULL,
-	"created_at"	datetime,
-	"updated_at"	datetime,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "pembukuans" (
-	"id"	integer NOT NULL,
-	"no_dokumen"	integer NOT NULL,
-	"no_bukti"	integer NOT NULL,
-	"tgl_pembukuan"	date NOT NULL,
-	"tgl_dokumen"	date NOT NULL,
-	"created_at"	datetime,
-	"updated_at"	datetime,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-CREATE TABLE IF NOT EXISTS "persediaans" (
-	"id"	integer NOT NULL,
-	"barang_id"	integer NOT NULL,
-	"jumlah"	integer NOT NULL,
-	"harga_satuan"	integer NOT NULL,
-	"pembukuan_id"	integer NOT NULL,
-	"jenis_persediaan_id"	integer NOT NULL,
-	"total"	integer NOT NULL,
-	"keterangan"	TEXT,
-	"created_at"	datetime,
-	"updated_at"	datetime,
-	PRIMARY KEY("id" AUTOINCREMENT)
-);
-INSERT INTO "migrations" VALUES (1,'2014_10_12_000000_create_users_table',1);
-INSERT INTO "migrations" VALUES (2,'2014_10_12_100000_create_password_resets_table',1);
-INSERT INTO "migrations" VALUES (3,'2019_08_19_000000_create_failed_jobs_table',1);
-INSERT INTO "migrations" VALUES (4,'2019_11_18_064633_create_barangs_table',1);
-INSERT INTO "migrations" VALUES (5,'2020_11_19_081117_create_kategori_barangs_table',1);
-INSERT INTO "migrations" VALUES (6,'2020_11_19_081221_create_jenis_persediaans_table',1);
-INSERT INTO "migrations" VALUES (7,'2020_11_19_081312_create_pembukuans_table',1);
-INSERT INTO "migrations" VALUES (8,'2020_11_19_081418_create_persediaans_table',1);
+INSERT INTO "kategori_barangs" VALUES (1,'Alat Tulis Menulis','2020-11-20 12:24:51','2020-11-20 12:24:51');
+INSERT INTO "kategori_barangs" VALUES (2,'Kertas HVS','2020-11-20 12:24:57','2020-11-20 12:24:57');
+INSERT INTO "kategori_barangs" VALUES (3,'Bahan Habis Pakai','2020-11-20 12:25:09','2020-11-20 12:25:09');
 INSERT INTO "barangs" VALUES (1,'Pulpen','box',1,'2020-11-20 12:25:48','2020-11-20 12:25:48');
 INSERT INTO "barangs" VALUES (2,'Nasi Box','box',3,'2020-11-20 12:26:01','2020-11-20 12:26:01');
 INSERT INTO "barangs" VALUES (3,'HVS Merah','rim',2,'2020-11-20 12:26:13','2020-11-20 12:26:13');
 INSERT INTO "barangs" VALUES (4,'HVS Putih','rim',2,'2020-11-20 12:26:19','2020-11-20 12:26:19');
-INSERT INTO "kategori_barangs" VALUES (1,'Alat Tulis Menulis','2020-11-20 12:24:51','2020-11-20 12:24:51');
-INSERT INTO "kategori_barangs" VALUES (2,'Kertas HVS','2020-11-20 12:24:57','2020-11-20 12:24:57');
-INSERT INTO "kategori_barangs" VALUES (3,'Bahan Habis Pakai','2020-11-20 12:25:09','2020-11-20 12:25:09');
 INSERT INTO "jenis_persediaans" VALUES (1,'Persediaan Masuk - Saldo Awal','2020-11-20 12:25:18','2020-11-20 12:25:18');
 INSERT INTO "jenis_persediaans" VALUES (2,'Persediaan Masuk - Pembelian','2020-11-20 12:25:25','2020-11-20 12:25:25');
 INSERT INTO "jenis_persediaans" VALUES (3,'Persediaan Masuk - Transfer Masuk','2020-11-20 12:25:30','2020-11-20 12:25:30');

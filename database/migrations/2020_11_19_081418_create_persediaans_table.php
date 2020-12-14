@@ -20,6 +20,7 @@ class CreatePersediaansTable extends Migration
             $table->integer('harga_satuan');
             $table->integer('pembukuan_id');
             $table->integer('jenis_persediaan_id');
+            $table->integer('keterangan');
             $table->integer('total');
             $table->timestamps();
         });

@@ -25,6 +25,40 @@ class PersediaanController extends Controller
         return view('persediaan.index', compact('persediaans','barangs','pembukuans','jenis_persediaans'));
     }
 
+    public function saldo_awal()
+    {
+        $persediaans = Persediaan::all()->where('jenis_persediaan_id',1);
+        $barangs = Barang::all();
+        $pembukuans = Pembukuan::all();
+        $jenis_persediaans = JenisPersediaan::all();
+        return view('persediaan.saldo_awal', compact('persediaans','barangs','pembukuans','jenis_persediaans'));
+    }
+    public function pembelian()
+    {
+        $persediaans = Persediaan::all()->where('jenis_persediaan_id',2);
+        $barangs = Barang::all();
+        $pembukuans = Pembukuan::all();
+        $jenis_persediaans = JenisPersediaan::all();
+        return view('persediaan.pembelian', compact('persediaans','barangs','pembukuans','jenis_persediaans'));
+    }
+    public function transfer_masuk()
+    {
+        $persediaans = Persediaan::all()->where('jenis_persediaan_id',3);
+        $barangs = Barang::all();
+        $pembukuans = Pembukuan::all();
+        $jenis_persediaans = JenisPersediaan::all();
+        return view('persediaan.transfer_masuk', compact('persediaans','barangs','pembukuans','jenis_persediaans'));
+    }
+    public function transfer_keluar()
+    {
+        $persediaans = Persediaan::all()->where('jenis_persediaan_id',4);
+        $barangs = Barang::all();
+        $pembukuans = Pembukuan::all();
+        $jenis_persediaans = JenisPersediaan::all();
+        return view('persediaan.transfer_keluar', compact('persediaans','barangs','pembukuans','jenis_persediaans'));
+    }
+    
+
     /**
      * Show the form for creating a new resource.
      *

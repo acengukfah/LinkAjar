@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/test', function () {
+    return view('layout.starter');
+});
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,15 +42,19 @@ Route::get('/pembukuan/edit/{id}', 'PembukuanController@edit');
 Route::post('/pembukuan/update/{id}', 'PembukuanController@update');
 //persediaan
 Route::get('/persediaan', 'PersediaanController@index');
+Route::get('/saldo-awal', 'PersediaanController@saldo_awal');
+Route::get('/pembelian', 'PersediaanController@pembelian');
+Route::get('/transfer-masuk', 'PersediaanController@transfer_masuk');
+Route::get('/transfer-keluar', 'PersediaanController@transfer_keluar');
 Route::post('/persediaan', 'PersediaanController@store');
 Route::get('/persediaan/delete/{id}', 'PersediaanController@destroy');
 Route::get('/persediaan/edit/{id}', 'PersediaanController@edit');
 Route::post('/persediaan/update/{id}', 'PersediaanController@update');
 //export testing
-Route::get('/saldo_awal', 'ExportController@saldo_awal');
-Route::get('/pembelian', 'ExportController@pembelian');
-Route::get('/transfer_masuk', 'ExportController@transfer_masuk');
-Route::get('/transfer_keluar', 'ExportController@transfer_keluar');
-Route::get('/tampil', 'ExportController@tampil');
+Route::get('/exp-saldo_awal', 'ExportController@saldo_awal');
+Route::get('/exp-pembelian', 'ExportController@pembelian');
+Route::get('/exp-transfer_masuk', 'ExportController@transfer_masuk');
+Route::get('/exp-transfer_keluar', 'ExportController@transfer_keluar');
+Route::get('/exp-tampil', 'ExportController@tampil');
 
 Route::get('/input-data', 'InputController@index');

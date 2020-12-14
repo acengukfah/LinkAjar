@@ -75,7 +75,7 @@
     <div class=" footer-copyright text-center py-3">
         © 2020 Copyright - BPN Kantor Pertanahan Kab. Klaten</a>
     </div>
-
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->        
     <script type="text/javascript" src="{{ asset('/js/jquery-3.2.1.slim.min.js') }}"></script>
